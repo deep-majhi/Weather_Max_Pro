@@ -1,0 +1,48 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherMaxPro</title>
+    <meta name="description" content="description"/>
+    <meta name="author" content="author" />
+    <meta name="keywords" content="keywords" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="" method='POST'>
+        {% csrf_token %}
+        <input type="text" name="city" placeholder="Enter City">
+        <button type="submit" class="btn">Enter</button>
+      </form>
+      {% if city is not None %}
+      <div class="weather">
+        <div class="left">
+          <h2>Temp : {{data.weather_temperature}} &deg;</h2>
+          <h3>City : {{city | capfirst}}</h3>
+          <h3>Country : {{data.weather_country | capfirst}}</h3>
+        </div>
+        <div class="right">
+          <div class="icon">
+            <p><img src='http://api.openweathermap.org/img/w/{{data.weather_icon}}.png' width="100px"/></p>
+          </div>
+          <div class="condition">
+            <p>Condition : {{data.weather_description | capfirst}}</p>
+            <p>Date : {{day}}</p>
+          </div>
+          
+        </div>
+      </div>
+     
+    </div>
+    <div class="deep" style="background-color:white ; width: 50%;color: black; position:relative; left: 25%; text-align: center;">
+      <p>Min Temp : {{data.weather_temperature_min }}
+        <p>Max Temp : {{data.weather_temperature_max }}
+          <p>Pressure : {{data.weather_pressure }}
+    </div>
+    {% endif %}
+  </body>
+</html>
+
+            
